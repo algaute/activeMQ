@@ -5,7 +5,7 @@
   <groupId>com.alain</groupId>
   <artifactId>activeMQ</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
  
   <name>activeMQ</name> 
   <url>http://maven.apache.org</url>
@@ -28,7 +28,6 @@
 	</repositories>
 	
 	<build>
-		<!-- <outputDirectory>${project.build.directory}/WEB-INF/classes</outputDirectory> -->
 
 		<plugins>
 			<plugin>
@@ -38,10 +37,10 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+      			</configuration>
+   			</plugin>
+   		</plugins>
+   	</build>
 
 	<dependencies>
 		<dependency>
@@ -64,7 +63,24 @@
 		    <version>1.7.21</version>
 		</dependency>
 				
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.13.Final</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-servlet-initializer</artifactId>
+			<version>3.0.13.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
 		<dependency>
 		    <groupId>org.apache.activemq</groupId>
