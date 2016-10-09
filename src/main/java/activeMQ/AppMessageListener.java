@@ -40,12 +40,12 @@ public class AppMessageListener implements MessageListener {
 		messageProtocol.setProperty3(message.getStringProperty("property3"));
 				
 		//Service.insertIntoDatabase(messageProtocol);
-		System.out.println(messageProtocol.toString());
 		
 		// We acknowledge the message, so we don't receive it again:
 		message.acknowledge();
 
-		logger.info("message "+message.getJMSCorrelationID()+" received");
+		System.out.println(this.consumerName+" received this message "+message.getJMSCorrelationID());
+		logger.info(this.consumerName+" received this message "+message.getJMSCorrelationID());
 	}
 	
 	protected void notifyError(Exception e)

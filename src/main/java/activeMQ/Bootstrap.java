@@ -1,7 +1,5 @@
 package activeMQ;
 
-import java.lang.Thread.State;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Context;
@@ -23,6 +21,8 @@ public class Bootstrap extends javax.ws.rs.core.Application {
 		activeMQ.setName("activeMQMessageConsumer");
 		activeMQ.start();
 		
+		new Thread(new MonitoringMessageConsumer(activeMQ)).start();
+
 		logger.info("-----------------------------");
 		logger.info("Web Services ready!");
 		logger.info("-----------------------------");

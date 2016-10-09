@@ -63,8 +63,9 @@ public class MessageReceiver {
             message.setStringProperty("property3", messageProtocol.getProperty3());	
 			
             producer.send(message);
-			logger.info("Sent message to "+messageQueueName+" with correlationId "+correlationId+" and timestamp "+message.getJMSTimestamp());
-			System.out.println("Message sent to "+messageQueueName+" in activeMQ");
+            
+			logger.info("message "+correlationId+" has been sent to queue "+messageQueueName);
+			System.out.println("message "+correlationId+" has been sent to queue "+messageQueueName);
 		}
 		catch (JMSException e)
 		{
