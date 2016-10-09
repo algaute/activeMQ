@@ -30,18 +30,20 @@ public class MessageReceiver {
     }
     
 	public void enqueueMessage(MessageProtocol messageProtocol) throws Exception {
-		
+		Connection connection=null;
+		Session session = null;
+
 		try
 		{
-			Connection connection = this.connectionFactory.createConnection();
-			connection.start();			
+			connection = this.connectionFactory.createConnection();	
+			connection.start();
 			
 			// Starts the producer...
-			Session session = connection.createSession(transacted, ackMode);
-            Destination adminQueue = session.createQueue(messageQueueName);
+			session = connection.createSession(transacted, ackMode);
+            Destination queue = session.createQueue(messageQueueName);
             
             //Setup a message producer to send message to the queue the server is consuming from
-            MessageProducer producer = session.createProducer(adminQueue);
+            MessageProducer producer = session.createProducer(queue);
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
             // producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 			
@@ -55,24 +57,29 @@ public class MessageReceiver {
             //message somehow...a Map works good
             String correlationId = this.createRandomString();
             message.setJMSCorrelationID(correlationId);
-			
+            
             message.setStringProperty("property1",  messageProtocol.getProperty1());
             message.setStringProperty("property2", messageProtocol.getProperty2());
-            message.setStringProperty("property3", messageProtocol.getProperty3());
+            message.setStringProperty("property3", messageProtocol.getProperty3());	
 			
-			producer.send(message);
-
+            producer.send(message);
 			logger.info("Sent message to "+messageQueueName+" with correlationId "+correlationId+" and timestamp "+message.getJMSTimestamp());
-			
 			System.out.println("Message sent to "+messageQueueName+" in activeMQ");
-			
-			session.close();
-			connection.close();
 		}
 		catch (JMSException e)
 		{
 			logger.error("Message not stored due to error "+e.getMessage(),e);
 			throw new Exception("Message not stored due to error "+e.getMessage(),e);
+		}
+		finally 
+		{
+			if (session!=null) {
+				session.close();
+			}
+	        if (connection != null) {
+	            connection.close();
+	        }
+	        //broker.stop();
 		}
 	}	
 

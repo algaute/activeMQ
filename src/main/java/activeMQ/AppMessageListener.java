@@ -7,9 +7,15 @@ import javax.jms.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MessageConsumer implements MessageListener {
+public class AppMessageListener implements MessageListener {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
+	
+	private String consumerName;
+    public AppMessageListener(String consumerName) 
+    {
+        this.consumerName = consumerName;
+    }
 	
 	@Override
 	public void onMessage(Message message) {
