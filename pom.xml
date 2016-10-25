@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.alain</groupId>
   <artifactId>activeMQ</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.3</version>
   <packaging>war</packaging>
  
   <name>activeMQ</name> 
@@ -33,7 +33,7 @@
 	    <url>https://github.com/algaute/activeMQ</url>
 	    <connection>scm:git:https://git@github.com/algaute/activeMQ.git</connection>
 	    <developerConnection>scm:git:https://git@github.com/algaute/activeMQ.git</developerConnection>
-	    <tag>master</tag>
+	    <tag>activeMQ-0.0.3</tag>
 	</scm>	
 	
 	<developers>
